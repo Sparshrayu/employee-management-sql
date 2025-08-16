@@ -22,36 +22,53 @@ It demonstrates how to manage employee records with basic SQL operations:
 8. DELETE to remove records
 
    ```sql
-   CREATE DATABASE employee_management;
-   USE employee_management;
-   CREATE TABLE Employees (
-    EmpID INT PRIMARY KEY AUTO_INCREMENT,
-    Name VARCHAR(100) NOT NULL,
-    Age INT,
-    Department VARCHAR(50),
-    Salary DECIMAL(10,2)
+ 
+
+    CREATE DATABASE employee_management;
+    USE employee_management;
+
+
+    CREATE TABLE departments (
+    dept_id INT PRIMARY KEY AUTO_INCREMENT,
+    dept_name VARCHAR(50) NOT NULL
     );
 
-   INSERT INTO Employees (Name, Age, Department, Salary)
+
+    CREATE TABLE employees (
+    emp_id INT PRIMARY KEY AUTO_INCREMENT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    phone VARCHAR(15),
+    hire_date DATE,
+    salary DECIMAL(10,2),
+    dept_id INT,
+    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
+    );
+
+   INSERT INTO departments (dept_name)
+   VALUES ('Human Resources'), ('Finance'), ('IT'), ('Marketing');
+
+
+   INSERT INTO employees (first_name, last_name, email, phone, hire_date, salary, dept_id)
    VALUES 
-   ('Rahul Sharma', 28, 'IT', 45000.00),
-   ('Sneha Patil', 25, 'HR', 35000.00),
-   ('Aman Verma', 30, 'Finance', 50000.00),
-   ('Priya Singh', 26, 'Marketing', 40000.00);
+   ('Amit', 'Sharma', 'amit.sharma@example.com', '9876543210', '2023-05-10', 45000, 3),
+   ('Priya', 'Patil', 'priya.patil@example.com', '9876501234', '2022-09-15', 50000, 2),
+   ('Rahul', 'Verma', 'rahul.verma@example.com', '9856321470', '2024-01-20', 60000, 3);
 
-   UPDATE Employees
-   SET Salary = 48000.00
-   WHERE Name = 'Rahul Sharma';
 
-   DELETE FROM Employees
-   WHERE Name = 'Priya Singh';
- 
-   SELECT * FROM Employees;
+   SELECT * FROM employees;
 
-   SELECT * FROM Employees WHERE Department = 'IT';
+   SELECT e.emp_id, e.first_name, e.last_name, d.dept_name, e.salary
+   FROM employees e
+   JOIN departments d ON e.dept_id = d.dept_id;
 
-   SELECT Department, AVG(Salary) AS AvgSalary
-   FROM Employees
-   GROUP BY Department;
+   UPDATE employees
+   SET salary = 55000
+   WHERE emp_id = 1;
+
+   DELETE FROM employees WHERE emp_id = 2;
+   SELECT * FROM employees;
+
 
 
