@@ -1,74 +1,35 @@
-# Employee Management System (MySQL)
+# Employee Management System (SQL Project)
 
+## 📌 Project Description
 This project is a simple **Employee Management System** built using MySQL.  
-It demonstrates how to manage employee records with basic SQL operations:  
-- Creating database and tables  
-- Inserting records  
-- Updating records  
-- Deleting records  
-- Fetching employee details  
+It demonstrates the use of **DDL (CREATE, DROP)**, **DML (INSERT, UPDATE, DELETE)**, and **Queries with JOINS**.  
+It can be used to manage employees, their departments, and salaries.
 
 ---
 
-## How to Run
+## ⚙️ Features
+- Create and manage employees
+- Manage departments
+- Insert, update, and delete employee data
+- Query and analyze employee information
 
-1. Open MySQL Workbench or any SQL client.  
-2. Create the database:
-3. Create the required tables (Employees, Departments, Salaries).
-4. Insert sample data into the tables.
-5. Run SELECT queries to view the data.
-6. Perform operations:
-7. UPDATE to modify employee data
-8. DELETE to remove records
+---
 
+## 🛠️ Technologies Used
+- MySQL
+- SQL Joins, Aggregate Functions, Group By, Having
+
+---
+
+## 🚀 How to Run
+1. Install MySQL and open MySQL Workbench or CLI.  
+2. Create the database:  
    ```sql
- 
+   CREATE DATABASE employee_management;
+   USE employee_management;
+   
+3. Run the SQL script:
 
-    CREATE DATABASE employee_management;
-    USE employee_management;
+Open the file employee_management.sql
 
-
-    CREATE TABLE departments (
-    dept_id INT PRIMARY KEY AUTO_INCREMENT,
-    dept_name VARCHAR(50) NOT NULL
-    );
-
-
-    CREATE TABLE employees (
-    emp_id INT PRIMARY KEY AUTO_INCREMENT,
-    first_name VARCHAR(50) NOT NULL,
-    last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(100) UNIQUE,
-    phone VARCHAR(15),
-    hire_date DATE,
-    salary DECIMAL(10,2),
-    dept_id INT,
-    FOREIGN KEY (dept_id) REFERENCES departments(dept_id)
-    );
-
-   INSERT INTO departments (dept_name)
-   VALUES ('Human Resources'), ('Finance'), ('IT'), ('Marketing');
-
-
-   INSERT INTO employees (first_name, last_name, email, phone, hire_date, salary, dept_id)
-   VALUES 
-   ('Amit', 'Sharma', 'amit.sharma@example.com', '9876543210', '2023-05-10', 45000, 3),
-   ('Priya', 'Patil', 'priya.patil@example.com', '9876501234', '2022-09-15', 50000, 2),
-   ('Rahul', 'Verma', 'rahul.verma@example.com', '9856321470', '2024-01-20', 60000, 3);
-
-
-   SELECT * FROM employees;
-
-   SELECT e.emp_id, e.first_name, e.last_name, d.dept_name, e.salary
-   FROM employees e
-   JOIN departments d ON e.dept_id = d.dept_id;
-
-   UPDATE employees
-   SET salary = 55000
-   WHERE emp_id = 1;
-
-   DELETE FROM employees WHERE emp_id = 2;
-   SELECT * FROM employees;
-
-
-
+Copy the queries OR execute the file in MySQL Workbench.
